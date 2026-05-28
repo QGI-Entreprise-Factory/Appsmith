@@ -1,0 +1,33 @@
+{
+  "name": "@appsmith/cli",
+  "version": "0.1.0",
+  "description": "Command line interface for Appsmith: manage applications & workspaces over the REST API, operate a self-hosted instance, scaffold apps, and run common monorepo dev tasks.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "bin": {
+    "appsmith": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsx src/index.ts",
+    "start": "node dist/index.js",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "node --test --import tsx test/*.test.ts",
+    "prepare": "npm run build"
+  },
+  "dependencies": {
+    "commander": "^12.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "tsx": "^4.16.0",
+    "typescript": "^5.5.0"
+  }
+}
