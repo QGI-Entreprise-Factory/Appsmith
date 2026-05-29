@@ -1,3 +1,7 @@
 node_modules/
 dist/
 *.log
+
+# Appsmith's root .gitignore excludes package-lock.json (the repo uses yarn),
+# but this standalone npm subproject needs it committed for reproducible CI.
+!package-lock.json

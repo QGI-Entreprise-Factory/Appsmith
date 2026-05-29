@@ -1,0 +1,50 @@
+name: CLI
+
+on:
+  push:
+    branches:
+      - release
+      - master
+    paths:
+      - "cli/**"
+      - ".github/workflows/cli.yml"
+  pull_request:
+    paths:
+      - "cli/**"
+      - ".github/workflows/cli.yml"
+
+# Allow only one concurrent run per ref, cancelling older in-progress runs.
+concurrency:
+  group: cli-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    working-directory: cli
+
+jobs:
+  cli:
+    name: Typecheck, build & test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: cli/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Build
+        run: npm run build
+
+      - name: Test
+        run: npm test
